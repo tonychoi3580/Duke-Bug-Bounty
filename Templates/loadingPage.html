@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <title> Bug Bounty </title>
+    <link rel="stylesheet" type="text/css" href="../static/loadingpg.css" />
+</head>
+
+<!--Still need to make body responsive-->
+<body onkeypress="redirect()">
+
+    <!--Redirects page to index.html whenever anything is clicked-->
+    <script>
+        window.addEventListener("click", redirect, false);
+        function redirect() {
+            location.href = "{{url_for('home_page')}}";
+        }
+    </script>
+    
+    <h2 class="button"><a href="{{url_for('home_page')}}"> Press any key or click to start </a></h2>
+    <h2 class="bottom"> ©2020 Duke OIT </h2>
+
+    
+    <div class = "titleimg">
+        <img src="../static/title1.gif" id = "three" alt = "Gif" />
+    </div>
+    <div class = "bebe">
+        <img src="../static/BeBe.gif" id ="bug1"/>
+    </div>
+    <div class = "killerbee">
+        <img src = "../static/killerbee.gif" id = "bug2"/>
+    </div>
+
+
+</body>
+</html>

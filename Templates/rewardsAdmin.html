@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <title> Bug Bounty </title>
+    <link rel="stylesheet" type="text/css" href="../static/Rewards.css" />
+</head>
+<body>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <script>
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+    </script>
+    <h1> Rewards </h1>
+
+    <img src="../static/BeBe.gif" id="bug1" />
+    <img src="../static/killerbee.gif" id="bug2" />
+
+    <div>
+        <table>
+            <tr>
+                <th>Level <br> (Security)</th>
+                <th>Reward</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td style="background-color: #C92D39;">Critical</td>
+                <td>$500-$1,000</td>
+                <td class="examples">Remote code execution, SQL injection, XXE</td>
+            </tr>
+            <tr>
+                <td style="background-color: #EF8D22">High</td>
+                <td>$150-$450</td>
+                <td class="examples"> Significant authentication bypass, Exposure of sensitive information</td>
+            </tr>
+            <tr>
+                <td style="background-color: #FCFF38">Medium</td>
+                <td>$50-$100</td>
+                <td class="examples">Cross-site scripting, Cross-site request forgery</td>
+            </tr>
+            <tr>
+                <td style="background-color:#7AB648">Low</td>
+                <td>None</td>
+                <td class="examples">A bug that does not pose a demonstrable security risk</td>
+            </tr>
+        </table>
+        <h3 onclick="redirectHome()">
+            Back
+        </h3>
+    </div>
+    <script>
+        function redirectHome () {
+            window.location.replace("{{url_for('adminindex')}}");
+        }
+    </script>
+
+
+</body>
+</html>

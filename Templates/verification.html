@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/verification.css" />
+    <title> Bug Bounty </title>
+
+</head>
+
+<body onload="pass_URL()">
+    <div class="nav">
+        <img src="../static/loading.gif" id="buffer" alt="Gif" />
+    </div>
+    
+    <p id="serverResponse"></p>
+    <script>
+        function pass_URL() {
+            data = { 'URL': initiateOAuth() };
+            $.ajax({
+                url: '/adminPage',
+                data: JSON.stringify(data, null, '\t'),
+                dataType: 'json',
+                contentType: 'application/json;charset=UTF-8',
+                type: 'POST',
+                success: window.location.replace("{{url_for('authorizeAdmin')}}")
+            });
+        }
+        function initiateOAuth() {
+            var url = window.location.href;
+            return url;
+        }
+    </script>
+    
+<img src="../static/BeBe.gif" id="bug1" />
+<img src="../static/killerbee.gif" id="bug2" />
+
+</body>
+</html>

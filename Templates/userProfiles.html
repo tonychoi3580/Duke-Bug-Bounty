@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/userProfile.css" />
+    <title> Bug Bounty </title>
+</head>
+<body>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <script>
+        function redirectHome() {
+            window.location.replace("{{url_for('adminindex')}}");
+        }
+        function redirectIndivProfile(i) {
+            window.location.replace('/userIndivProfile-'+i);
+        }
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+    </script>
+    <h1> User <br /> Profiles </h1>
+    <div class="ticket">
+        <table class="entries">
+            <tr>
+                <th class="view"></th>
+                <th class="net"> netID</th>
+            </tr>
+            {% for i in userslist %}
+            <tr class="entry">
+                <td class="viewItem" onclick="redirectIndivProfile('{{i}}')"> View </td>
+                <td>{{i}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <h3 id="home" onclick="redirectHome()">Back</h3>
+    </div>
+
+    <img src="../static/BeBe.gif" id="bug1" />
+    <img src="../static/killerbee.gif" id="bug2" />
+
+
+</body>
+</html>

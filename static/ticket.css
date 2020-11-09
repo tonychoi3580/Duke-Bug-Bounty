@@ -1,0 +1,145 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    cursor: url("../static/cursor.png"), auto;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    cursor: url("../static/cursor.png"), auto;
+    text-align: center;
+    padding: 20px;
+    background-image: url(../static/background2.jpeg);
+    background-size: 1450px 850px;
+}
+
+a:hover, h3, .viewItem:hover, #sound:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+h1 {
+    font-size: 50px;
+    color: #de5f85;
+}
+
+.ticket::-webkit-scrollbar {
+    width: 25px;
+    z-index: 2;
+}
+
+.ticket::-webkit-scrollbar-track {
+    background-color: #de5f85;
+    border: 3px solid black;
+    z-index: 2;
+}
+
+.ticket::-webkit-scrollbar-thumb {
+    background-color: #834187;
+    border: 3px solid black;
+    z-index: 3;
+}
+th {
+    padding: 15px 0;
+}
+.view {
+    padding-right: 100px;
+    
+}
+entries {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    
+}
+table {
+    border-spacing: 0 10px;
+}
+tr {
+    background-color: white;
+    font-size: 15px;
+    
+}
+td {
+    padding: 8px;
+    
+}
+.viewItem {
+    background-color: #de5f85;
+    color: white;
+}
+
+.viewItem:hover {
+    background-color: #99d9ea;
+}
+h3 {
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 10%;
+    padding: 5px;
+    min-width: 150px;
+    position: relative;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+h3:hover {
+    background-color: lightcoral;
+}
+
+#bug1 {
+    position: fixed;
+    left:0%;
+    width: 20%;
+    top:15%;
+}
+
+
+#bug1:hover{
+    margin-top: 150px;
+}
+
+#bug2{
+    position: fixed;
+    width: 25%;
+    right: -1%;
+    bottom: 25%;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+.entries{
+    margin: auto;
+}
+
+.ticket {
+    background-color: #ffc374;
+    margin: auto;
+    border: solid;
+    border-color: #de5f85;
+    margin-top: 20px;
+    padding: 30px;
+    width: 60%;
+    max-width: 725px;
+    padding-bottom: 20px;
+    height: 470px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 2;
+    position: relative;
+}
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}

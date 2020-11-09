@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    cursor: url("../static/cursor.png"), auto;
+}
+
+h1 {
+    color: #de5f85;
+    font-size: 60px;
+    line-height: 110%;
+    position: relative;
+    top: 30px;
+}
+
+body {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px;
+    background-image: url(../static/background2.jpeg);
+    background-size:1450px 850px;
+    cursor: url("../static/cursor3.png"), auto;
+}
+a:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+   }
+
+div {
+    background-color: #ffc374;
+    margin: 30px auto;
+    width: 30%;
+    border: solid;
+    border-color: #de5f85;
+    position: relative;
+    min-width: 600px;
+    position: relative;
+    top: 32px;
+}
+
+th {
+    color: black;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+
+table, th, td {
+    border: 1px solid #de5f85;
+   
+}
+
+th, td {
+    padding: 20px;
+}
+
+h3 {
+    margin: -40px auto;
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 10%;
+    padding: 5px;
+    /*margin-right: 400px;*/
+    min-width: 150px;
+    position: absolute;
+    right: -30px;
+    bottom: 15px;
+    color: white;
+}
+h3:hover{
+    background-color: lightcoral;
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+#sound:hover{
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+
+
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+.examples{
+    font-family: "Cormac";
+    color: black;
+}
+
+#bug1 {
+    position: fixed;
+    left:6%;
+    width: 20%;
+    top:15%;
+}
+
+
+#bug1:hover{
+    margin-top: 150px;
+}
+
+#bug2{
+    position: fixed;
+    width: 25%;
+    right: 3%;
+    bottom: 25%;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}

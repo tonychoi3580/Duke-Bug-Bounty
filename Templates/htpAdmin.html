@@ -1,0 +1,271 @@
+﻿﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <title> Bug Bounty </title>
+    <link rel="stylesheet" type="text/css" href="../static/htp.css" />
+</head>
+<body>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <script>
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleButtonOn(button) {
+            switch (button) {
+                case 'x':
+                    document.getElementById("x").src = "../static/Xbuttonhover.png";
+                    break;
+                case 'y':
+                    document.getElementById("y").src = "../static/newYhover.png";
+                    break;
+                case 'b':
+                    document.getElementById("b").src = "../static/Bbuttonhover.png";
+                    break;
+                case 'a':
+                    document.getElementById("a").src = "../static/Abuttonhover.png";
+                    break;
+                case 'home':
+                    document.getElementById("home").src = "../static/homehover.png";
+
+            }
+        }
+        function toggleButtonOff(button) {
+            switch (button) {
+                case 'x':
+                    document.getElementById("x").src = "../static/Xbutton.png";
+                    break;
+                case 'y':
+                    document.getElementById("y").src = "../static/newYbutton.png";
+                    break;
+                case 'b':
+                    document.getElementById("b").src = "../static/Bbutton.png";
+                    break;
+                case 'a':
+                    document.getElementById("a").src = "../static/Abutton.png";
+                    break;
+                case 'home':
+                    document.getElementById("home").src = "../static/home.png";
+
+            }
+        }
+    </script>
+    <h1> How To Play </h1>
+    
+    <div class=slider>
+            <img src="../static/newSwitch.png" id="switch" />
+
+            <div class="htp-slide-container">
+                <input type="radio" name="htp" id="htpvid" />
+                <div class="slides" id="vid">
+                    <video width="438" height="255" controls>
+                        <source src="../static/DukeBugBountyTutorialVid.mp4" type='video/mp4'>
+                        Your browser does not support this video tag. Please switch to a compatible browser.
+                    </video>
+                </div>
+
+                <input type="radio" name="htp" id="htpisv" />
+
+            
+                <div class="slides" id="isv">
+                    <div class="row">
+                        <div class="column" id="domains">
+                            In Scope Domains
+                            <p class="ind"> studentaffairs.duke.edu </p>
+                            <p class="ind"> pratt.duke.edu </p>
+                            <p class="ind"> trinity.duke.edu </p>
+                            <p class="ind"> shib.oit.duke.edu </p>
+                            <p class="ind"> fuqua.duke.edu </p>
+                        </div>
+                        <div class="column" id="vuln">
+                            In Scope Vulnerabilities
+                            <p class="isvp"> Remote Code Execution <span class="tooltiptext">In which an attacker can seize control of another person’s machine/computer and execute their own code/commands.</span></p>
+                            <p class="isvp">SQL Injection <span class="tooltiptext">In which an attacker can manipulate a query, through insertion of malicious code, to reveal sensitive database information.</span></p>
+                            <p class="isvp">Privilege Escalation<span class="tooltiptext">In which a user can gain additional capabilities than intended just for the user, eg a guest user gains administrator privileges.</span></p>
+                            <p class="isvp">Authorization Bypass <span class="tooltiptext"> In which a system possesses weak authentication/identity confirmation mechanisms, granting attackers access to sensitive data.</span></p>
+                            <p class="isvp"> Information Leak <span class="tooltiptext">In which confidential data is released to unauthorized parties.</span> </p>
+                            <p class="isvp"> Cross-Site Scripting <span class="tooltiptext">In which an attacker injects malicious scripts into normally trusted sites, and these scripts will execute in an unsuspecting user’s browser.</span> </p>
+                            <p class="isvp"> Cross Site Request Forgery <span class="tooltiptext">An attack that forces an authenticated user to execute an unwanted action.</span></p>
+                        </div>
+                        <div class="column" id="ovuln">
+                            Out of Scope Vulnerabilities
+                            <p class="osv" id="exception"> A bug that does not pose a demonstrable security risk </p>
+                            <p class="osv"> Denial of Service (DOS) <span class="tooltiptext">In which users cannot access services and resources due to spikes in traffic.</span></p>
+                            <p class="osv"> Social Engineering <span class="tooltiptext">In which users are tricked into releasing sensitive information</span> </p>
+                            <p class="osv"> Physical Exploits of Our Servers and Network including DNS poisoning and ARP spoofing <span class="tooltiptext">DNS poisoning: in which traffic is directed towards an illegitimate, and potentially malicious, website <br /> <br /> ARP spoofing: in which an attacker can link their own MAC address with another user’s legitimate IP addressing and consequently pose as the legitimate user</span></p>
+                            <p class="osv"> Clickjacking, open redirects, or lack of security headers <span class="tooltiptext">Clickjacking: in which an attacker trick a user into clicking on a malicious link by manipulating the user interface <br /> <br /> Open redirects: in which an attack redirects a user from a legitimate website to a fake one</span></p>
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <input type="radio" name="htp" id="htprls" />
+                <div class="slides" id="rls">
+                    <h2>Rules</h2>
+                    <p class="rlsp">In order to take part in this program, you must be a Duke student (undergraduate/graduate), postdoc, or full-time benefits eligible employee.</p>
+                    <p class="rlsp"><br /> For employees, participation in the bug bounty program must not interfere with job responsibilities and should be conducted outside of work hours.</p>
+                    <p class="rlsp"><br />Any involvement you have with an in-scope domain that could create a conflict of interest renders that domain out-of-scope for you.</p>
+                    <p class="rlsp"><br />Do not publicly disclose any vulnerabilities without explicit written permission from the Office of Information Technology at Duke University.</p>
+                    <p class="rlsp"><br />Do not perform any tests that will disrupt services or impair others' ability to use them.</p>
+                    <p class="rlsp"><br />Do not use automated scanners.</p>
+                    <p class="rlsp"><br />To be eligible for bounty, all testing must be performed within the scope described above. Out-of-scope submissions will be accepted and acted upon, but are not eligible for bounty.</p>
+                    <p class="rlsp"><br />If you become aware of a vulnerability involving an out-of-scope domain, it is still appropriate to report the vulnerability via this program, and the same safe harbor provisions apply to protect those who responsibly report.</p>
+                    <p class="rlsp"><br />Access does not equate to authorization. If a vulnerability provides unintended access to data, do not access the data beyond the minimum extent necessary to effectively demonstrate the presence of a vulnerability. If you encounter any Moderate or High Risk data during testing (such as Personally Identifiable Information (PII), Protected Health Information (PHI), credit card data, or other confidential information), cease testing and submit a report immediately.</p>
+                    <p class="rlsp"><br />Testing must not violate the Duke Community Standard, the Duke Compact, Access Normand Level 8.3.4-curtail-9, or any applicable laws.</p>
+                    <p class="rlsp"><br />To the furthest extent possible, only interact with test accounts you own or accounts with explicit permission from the account owner.</p>
+                    <p class="rlsp"><br />You must run a <a href="https://tools.kali.org/>Kali"> Linux</a>image on a Duke virtual machine in order to perform penetration testing in this program. You may reserve a Duke virtual machine at vcm.duke.edu.</p>
+                </div>
+
+                <input type="radio" name="htp" id="htpfaq" />
+                <div class="slides" id="FAQ">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <h4 class="question">What is the difference between a software bug and a software vulnerability?</h4>
+                    <p class="ans">A bug is a flaw in a program’s code that causes the program to behave incorrectly, and this incorrect behavior may result in a vulnerability that puts sensitive information at risk. For example, if a system won't grant you access to your account even though you entered the correct password, then that is a bug. However, if a system <i>will</i> grant you access to your account when you entered the <i>wrong</i> password, then that is a vulnerability.</p>
+                    <h4 class="question">What is a bug bounty?</h4>
+                    <p class="ans">A bug bounty is a program in which vulnerabilities found and submitted by participants are rewarded accordingly: we place a bounty on bugs.</p>
+                    <h4 class="question">What are some resources that are helpful/what do I need to know?</h4>
+                    <p class="ans">Basic descriptions of in-scope vulnerabilities can be found in the “How to Play” section, but for more hands-on experience, we recommend learning from <a href="https://portswigger.net/web-security">PortSwigger</a>. It would also be beneficial to get your feet wet with Kali Linux, a Linux distribution designed for penetration testing, and become familiar with the tools that it offers.</p>
+                    <h4 class="question">I think I’ve found a bug, but I need some more help testing. Is there a way I can contact other members of the bug bounty community?</h4>
+                    <p class="ans">We (plan) to have an open Slack channel where you can contact others/work together. This channel also connects you to the Duke security team, and as always, feel free to email us at bounty.duke.edu.</p>
+                    <h4 class="question">What is a virtual machine (VM) and image? Why do I need to test on a VM rather than my own host machine?</h4>
+                    <p class="ans">A VM is basically another computer inside your computer. Think of it as a sandbox that’s isolated from your host machine, and whatever you do on it won’t affect your host machine. An image contains the operating system, data files, and applications, so you’re able to run a Kali Linux image on your Windows machine, for example.</p>
+                    <h4 class="question">What do I get out of participating in this program?</h4>
+                    <p class="ans">The “Rewards” page highlights expected compensations for different vulnerabilities. Penetration testing and vulnerability assessments are important parts of maintaining secure systems, and OIT is committed to rewarding our contributors fairly for their work in improving Duke's digital security. In addition, this serves as a good opportunity to sharpen your own professional/technical skills. <b>Starting in Fall 2020, OIT will offer a signed certificate to put on your resume for anyone who uncovers a critical bug.</b></p>
+                    <h4 class="question">Will this put my computer at risk?</h4>
+                    <p class="ans">Penetration testing is a safe way to assess the security of a system as long as you follow the instructions outlined in the “Rules” page. Reserve a virtual computing manager (VCM) to perform tests on a virtual machine. This eliminates potential risks to your local machine from any testing.</p>
+                    <h4 class="question">What happens if I find a critical bug?</h4>
+                    <p class="ans">If you think you’ve uncovered a critical bug while performing penetration testing, please report the vulnerability on this site as soon as possible. Answer the questions on the form in detail and we will look at your submission as soon as we can. As per the confidentiality agreement, do not disclose the results of your testing to anyone without the express written consent of the Office of Information Technology.</p>
+                </div>
+                <div class="slides" id="front">
+                    <img src="../static/dukelogo.gif" id="logo" />
+                    <h4 class = "logowords">©2020 Duke OIT</h4>
+                    
+                </div>
+            </div>
+        
+
+        <div id="htp-button-container">
+            <div class="htpvid-button">
+                <label class="buttons" for="htpvid"> <img src="../static/Xbutton.png" id ="x" width="50" onmouseout="toggleButtonOff(id)" onmouseover="toggleButtonOn(id)"/>  </label>
+            </div>
+
+            <div class="htpisv-button">
+                <label class="buttons" for="htpisv"> <img src="../static/newYbutton.png" id="y" width="50" onmouseout="toggleButtonOff(id)" onmouseover="toggleButtonOn(id)"/>  </label>
+            </div>
+
+            <div class="htprls-button">
+                <label class="buttons" for="htprls"><img src="../static/Bbutton.png" id="b" width="50" onmouseout="toggleButtonOff(id)" onmouseover="toggleButtonOn(id)"/></label>
+            </div>
+
+            <div class="htpfaq-button">
+                <label class="buttons" for="htpfaq"> <img src="../static/Abutton.png" id="a" width="50" onmouseout="toggleButtonOff(id)" onmouseover="toggleButtonOn(id)"/> </label>
+            </div>
+
+            <div class="home">
+                <label class="buttons" for="htphome"> <img src="../static/home.png" id="home" width="50" onmouseout="toggleButtonOff(id)" onmouseover="toggleButtonOn(id)" onclick="redirectHome()" /> </label>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="htpbutton">
+        <h2>Press Buttons For More </h2>
+        <p id="choose" class="xcolor">X : How to Play Video</p>
+        <p id="choose" class="acolor">A : FAQ</p>
+        <p id="choose" class="ycolor">Y : In-scope & Out-of-Scope Vulnerabilities</p>
+        <p id="choose" class="bcolor">B : Rules</p>
+        <p id="choose" class="homeButton"> <img src="../static/house.png" width="40" height="40" style="vertical-align:middle"/>: Home </p>
+
+        <script>
+       function redirectHome() {
+                window.location.replace("{{url_for('adminindex')}}");
+            }
+
+        </script>
+    </div>
+
+
+    <div class="bebe">
+        <img src="../static/BeBe.gif" id="bug1" />
+    </div>
+    <div class="killerbee">
+        <img src="../static/killerbee.gif" id="bug2" />
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/submission.css" />
+    <title> Bug Bounty </title>
+</head>
+<body onload="postURL()">
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+
+    <script>
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        var idleTime = 0;
+        var trigger = 2340000;
+        $(document).ready(function () {
+
+            var idleInterval = setInterval(timerIncrement, 60000); // 1 minute
+            setInterval('displayInf()', trigger);
+            $('body').bind('click dblclick keypress mousemove scroll', function () {
+                clearDisplayInf();
+            });
+
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+
+            });
+        });
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 39) { 
+                window.location.reload();
+            }
+        }
+        function displayInf() {
+            $('body').append(' <div class="alert">Warning: <br /> Your session will refresh and your data will be lost if no movement is detected.</div>');
+        }
+        function clearDisplayInf() {
+            trigger = clearInterval(trigger);
+            $('.alert').remove();
+            trigger = setInterval('displayInf()', 2340000);
+        }
+        function redirectHome() {
+                window.location.replace("{{url_for('home_page')}}");
+            }
+
+        //returns the current url of page (contains auth code)
+        function getURL() {
+            url = window.location.href;
+            return url;
+        }
+
+        //sets the value of our url variable to the url of the page
+        function postURL() {
+            var urlLink = getURL();
+            document.getElementById("Submission_URL").setAttribute('value', urlLink);
+        }
+    </script>
+
+    <h1> Submission </h1>
+    <div class="submit">
+        <div class="intro"> Thank you for your time and effort spent improving the security of our Duke community! <br />  <br /> Please answer the following questions regarding your penetration testing and any vulnerabilities found. <br /> <br /> Should you have any questions, please do not hesitate to email <a href="mailto:bounty@duke.edu"> bounty@duke.edu</a>. <br /> <p><span style="color:red"> * </span> = required field</p></div>
+        <form action="#" id="submissionForm" method="post" enctype="multipart/form-data" onsubmit="return confirm('Do you really want to submit the form?');">
+            <input type="hidden" name="Submission_URL" id="Submission_URL" />
+            <div class="fields">
+                <label for="name"> 1) Your name <span style="color:red"> * </span><br /></label>
+                <input type="text" contenteditable="true" name="name" class="input" required />
+            </div>
+            <div class="fields">
+                <label for="hostName"> 2) VCM Hostname <span style="color:red"> * </span><br /> </label>
+                <input type="text" name="vcm" class="input" required />
+            </div>
+            <div class="fields">
+                <label for="domains"> 3) What domain is the vulnerability on? <span style="color:red"> * </span><br /> </label>
+                <select name="domain">
+                    <option value="studentaffairs.duke.edu"> studentaffairs.duke.edu </option>
+                    <option value="pratt.duke.edu"> pratt.duke.edu </option>
+                    <option value="trinity.duke.edu"> trinity.duke.edu </option>
+                    <option value="fuqua.duke.edu"> fuqua.duke.edu </option>
+                    <option value="shib.oit.duke.edu"> shib.oit.duke.edu </option>
+                    <option value="registrar.duke.edu"> registrar.duke.edu </option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="vuln"> 4) What type of vulnerability have you uncovered? <span style="color:red"> * </span><br /> </label>
+                <select name="vuln">
+                    <option value="Remote Code Execution (RCE)"> Remote Code Execution (RCE) </option>
+                    <option value="SQL Injection"> SQL Injection </option>
+                    <option value="Authoriztion Bypass/Escalation"> Authoriztion Bypass/Escalation </option>
+                    <option value="Sensistive Information Leaks"> Sensistive Information Leaks </option>
+                    <option value="Cross-Site Scripting (XSS)"> Cross-Site Scripting (XSS) </option>
+                    <option value="Cross-Site Request Forgery (CSRF)"> Cross-Site Request Forgery (CSRF) </option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="description"> 5) Describe the vulnerability in detail. <span style="color:red"> * </span><br /> </label>
+                <textarea name="descrip" class="input" form="submissionForm" rows="6" cols="70" required></textarea>
+            </div>
+            <div class="fields">
+                <label for="impact"> 6) What is the vulnerability's impact on the domain? <span style="color:red"> * </span><br /> </label>
+                <textarea name="impact" class="input" form="submissionForm" rows="6" cols="50" required></textarea>
+            </div>
+            <div class="fields">
+                <label for="impact"> 7) Describe the tests you ran in specific detail. How can we retrigger/reproduce this bug? <span style="color:red"> * </span><br /> </label>
+                <textarea name="reproduce" class="input" form="submissionForm" rows="6" cols="50" required></textarea>
+            </div>
+            <div class="fields">
+                <label for="impact"> 8) What fixes, if any, do you propose? <br /> </label>
+                <textarea name="fixes" class="input" form="submissionForm" rows="6" cols="50"></textarea>
+            </div>
+            <div>
+                <label for="img">Select images or videos collectively within 25 MB:</label> <br />
+                <input type="file" name="attachmentOne" id="uploadOne" accept="image/*,video/*"> <br />
+                <input type="hidden" id="attachmentOneSize" value="0">
+                <input type="file" name="attachmentTwo" id="uploadTwo" accept="image/*,video/*"> <br />
+                <input type="hidden" id="attachmentTwoSize" value="0">
+                <input type="file" name="attachmentThree" id="uploadThree" accept="image/*,video/*"> <br />
+                <input type="hidden" id="attachmentThreeSize" value="0">
+                <input type="file" name="attachmentFour" id="uploadFour" accept="image/*,video/*"> <br />
+                <input type="hidden" id="attachmentFourSize" value="0">
+                <input type="file" name="attachmentFive" id="uploadFive" accept="image/*,video/*">
+                <input type="hidden" id="attachmentFiveSize" value="0">
+                <script>
+                    var controlOne = document.getElementById("uploadOne");
+                    controlOne.addEventListener("change", function (event) {
+                        var extensionOne = controlOne.files;
+                        var blobOne = extensionOne[0];
+                        extensionOne = extensionOne[0].type;
+
+                        document.getElementById("attachmentOneSize").value = blobOne.size;
+                        var fileReaderOne = new FileReader();
+                        fileReaderOne.onloadend = function (e) {
+
+                            var typeOne = extensionOne.split('/')[1];
+                            switch (typeOne) {
+                                case "quicktime":
+                                    var arrOne = (new Uint8Array(e.target.result)).subarray(4, 8);
+                                    break;
+                                case "mp4":
+                                    var arrOne = (new Uint8Array(e.target.result).subarray(4, 12));
+                                    break;
+                                default:
+                                    var arrOne = (new Uint8Array(e.target.result)).subarray(0, 4);
+                            }
+                            var headerOne = "";
+                            for (var i = 0; i < arrOne.length; i++) {
+                                headerOne += arrOne[i].toString(16);
+                            }
+
+                            switch (headerOne) {
+                                case "89504e47":
+                                    var mimeOne = "image/png";
+                                    break;
+                                case "47494638":
+                                    var mimeOne = "image/gif";
+                                    break;
+                                case "ffd8ffe0":
+                                case "ffd8ffe1":
+                                case "ffd8ffe2":
+                                case "ffd8ffe3":
+                                case "ffd8ffe8":
+                                    var mimeOne = "image/jpeg";
+                                    break;
+                                case "52494646":
+                                    var mimeOne = "video/avi";
+                                    break;
+                                case "4f676753":
+                                    var mimeOne = "application/ogg";
+                                    break;
+                                case "464c5601":
+                                    var mimeOne = "video/x-flv";
+                                    break;
+                                case "3026b275":
+                                    var mimeOne = "video/x-ms-wmv";
+                                    break;
+                                case "66726565":
+                                case "6d646174":
+                                case "77696465":
+                                case "706e6f74":
+                                case "736b6970":
+                                case "6d6f6f76":
+                                case "66747970":
+                                    var mimeOne = "video/quicktime";
+                                    break;
+                                case "667479704d534e56":
+                                case "6674797069736f6d":
+                                case "667479706d703432":
+                                    var mimeOne = "video/mp4";
+                                    break;
+                                default:
+                                    var mimeOne = "unknown";
+
+                            }
+                            if (mimeOne == "video/quicktime" && headerOne == 66747970) {
+                                arrOne = (new Uint8Array(e.target.result)).subarray(8, 12);
+                                for (var i = 0; i < arrOne.length; i++) {
+                                    headerOne += arr[i].toString(16);
+                                }
+                                if (headerOne != 6674797071742020) {
+                                    mimeOne = "unknown";
+                                }
+                            }
+                            if (extensionOne != mimeOne) {
+                                alert("There's something wrong with this file; upload another.");
+                                document.getElementById("uploadOne").value = '';
+                            }
+
+                        };
+                        fileReaderOne.readAsArrayBuffer(blobOne);
+
+                    }, false);
+
+                    var controlTwo = document.getElementById("uploadTwo");
+                    controlTwo.addEventListener("change", function (event) {
+                        var extensionTwo = controlTwo.files;
+                        var blobTwo = extensionTwo[0];
+                        extensionTwo = extensionTwo[0].type;
+
+                        document.getElementById("attachmentTwoSize").value = blobTwo.size;
+                        var fileReaderTwo = new FileReader();
+                        fileReaderTwo.onloadend = function (e) {
+                            var typeTwo = extensionTwo.split('/')[1];
+                            switch (typeTwo) {
+                                case "quicktime":
+                                    var arrTw = (new Uint8Array(e.target.result)).subarray(4, 8);
+                                    break;
+                                case "mp4":
+                                    var arrTwo = (new Uint8Array(e.target.result).subarray(4, 12));
+                                    break;
+                                default:
+                                    var arrTwo = (new Uint8Array(e.target.result)).subarray(0, 4);
+                            }
+                            var headerTwo = "";
+                            for (var i = 0; i < arrTwo.length; i++) {
+                                headerTwo += arrTwo[i].toString(16);
+                            }
+
+                            switch (headerTwo) {
+                                case "89504e47":
+                                    var mimeTwo = "image/png";
+                                    break;
+                                case "47494638":
+                                    var mimeTwo = "image/gif";
+                                    break;
+                                case "ffd8ffe0":
+                                case "ffd8ffe1":
+                                case "ffd8ffe2":
+                                case "ffd8ffe3":
+                                case "ffd8ffe8":
+                                    var mimeTwo = "image/jpeg";
+                                    break;
+                                case "52494646":
+                                    var mimeTwo = "video/avi";
+                                    break;
+                                case "4f676753":
+                                    var mimeTwo = "application/ogg";
+                                    break;
+                                case "464c5601":
+                                    var mimeTwo = "video/x-flv";
+                                    break;
+                                case "3026b275":
+                                    var mimeTwo = "video/x-ms-wmv";
+                                    break;
+                                case "66726565":
+                                case "6d646174":
+                                case "77696465":
+                                case "706e6f74":
+                                case "736b6970":
+                                case "6d6f6f76":
+                                case "66747970":
+                                    var mimeTwo = "video/quicktime";
+                                    break;
+                                case "667479704d534e56":
+                                case "6674797069736f6d":
+                                case "667479706d703432":
+                                    var mimeTwo = "video/mp4";
+                                    break;
+                                default:
+                                    var mimeTwo = "unknown";
+
+                            }
+                            if (mimeTwo == "video/quicktime" && headerTwo == 66747970) {
+                                arrTwo = (new Uint8Array(e.target.result)).subarray(8, 12);
+                                for (var i = 0; i < arrTwo.length; i++) {
+                                    headerTwo += arr[i].toString(16);
+                                }
+                                if (headerTwo != 6674797071742020) {
+                                    mimeTwo = "unknown";
+                                }
+                            }
+                            if (extensionTwo != mimeTwo) {
+                                alert("There's something wrong with this file; upload another.");
+                                document.getElementById("uploadTwo").value = '';
+                            }
+
+                        };
+                        fileReaderTwo.readAsArrayBuffer(blobTwo);
+
+                    }, false);
+
+                    var controlThree = document.getElementById("uploadThree");
+                    controlThree.addEventListener("change", function (event) {
+                        var extensionThree = controlThree.files;
+                        var blobThree = extensionThree[0];
+                        extensionThree = extensionThree[0].type;
+
+                        document.getElementById("attachmentThreeSize").value = blobThree.size;
+                        var fileReaderThree = new FileReader();
+                        fileReaderThree.onloadend = function (e) {
+                            var typeThree = extensionThree.split('/')[1];
+                            switch (typeThree) {
+                                case "quicktime":
+                                    var arrThree = (new Uint8Array(e.target.result)).subarray(4, 8);
+                                    break;
+                                case "mp4":
+                                    var arrThree = (new Uint8Array(e.target.result).subarray(4, 12));
+                                    break;
+                                default:
+                                    var arrThree = (new Uint8Array(e.target.result)).subarray(0, 4);
+                            }
+                            var headerThree = "";
+                            for (var i = 0; i < arrThree.length; i++) {
+                                headerThree += arrThree[i].toString(16);
+                            }
+
+                            switch (headerThree) {
+                                case "89504e47":
+                                    var mimeThree = "image/png";
+                                    break;
+                                case "47494638":
+                                    var mimeThree = "image/gif";
+                                    break;
+                                case "ffd8ffe0":
+                                case "ffd8ffe1":
+                                case "ffd8ffe2":
+                                case "ffd8ffe3":
+                                case "ffd8ffe8":
+                                    var mimeThree = "image/jpeg";
+                                    break;
+                                case "52494646":
+                                    var mimeThree = "video/avi";
+                                    break;
+                                case "4f676753":
+                                    var mimeThree = "application/ogg";
+                                    break;
+                                case "464c5601":
+                                    var mimeThree = "video/x-flv";
+                                    break;
+                                case "3026b275":
+                                    var mimeThree = "video/x-ms-wmv";
+                                    break;
+                                case "66726565":
+                                case "6d646174":
+                                case "77696465":
+                                case "706e6f74":
+                                case "736b6970":
+                                case "6d6f6f76":
+                                case "66747970":
+                                    var mimeThree = "video/quicktime";
+                                    break;
+                                case "667479704d534e56":
+                                case "6674797069736f6d":
+                                case "667479706d703432":
+                                    var mimeThree = "video/mp4";
+                                    break;
+                                default:
+                                    var mimeThree = "unknown";
+
+                            }
+                            if (mimeThree == "video/quicktime" && headerThree == 66747970) {
+                                arrThree = (new Uint8Array(e.target.result)).subarray(8, 12);
+                                for (var i = 0; i < arrThree.length; i++) {
+                                    headerThree += arr[i].toString(16);
+                                }
+                                if (headerThree != 6674797071742020) {
+                                    mimeThree = "unknown";
+                                }
+                            }
+                            if (extensionThree != mimeThree) {
+                                alert("There's something wrong with this file; upload another.");
+                                document.getElementById("uploadThree").value = '';
+                            }
+
+                        };
+                        fileReaderThree.readAsArrayBuffer(blobThree);
+
+                    }, false);
+
+                    var controlFour = document.getElementById("uploadFour");
+                    controlFour.addEventListener("change", function (event) {
+                        var extensionFour = controlFour.files;
+                        var blobFour = extensionFour[0];
+                        extensionFour = extensionFour[0].type;
+
+                        document.getElementById("attachmentFourSize").value = blobFour.size;
+                        var fileReaderFour = new FileReader();
+                        fileReaderFour.onloadend = function (e) {
+                            var typeFour = extensionFour.split('/')[1];
+                            switch (typeFour) {
+                                case "quicktime":
+                                    var arrFour = (new Uint8Array(e.target.result)).subarray(4, 8);
+                                    break;
+                                case "mp4":
+                                    var arrFour = (new Uint8Array(e.target.result).subarray(4, 12));
+                                    break;
+                                default:
+                                    var arrFour = (new Uint8Array(e.target.result)).subarray(0, 4);
+                            }
+                            var headerFour = "";
+                            for (var i = 0; i < arrFour.length; i++) {
+                                headerFour += arrFour[i].toString(16);
+                            }
+                            switch (headerFour) {
+                                case "89504e47":
+                                    var mimeFour = "image/png";
+                                    break;
+                                case "47494638":
+                                    var mimeFour = "image/gif";
+                                    break;
+                                case "ffd8ffe0":
+                                case "ffd8ffe1":
+                                case "ffd8ffe2":
+                                case "ffd8ffe3":
+                                case "ffd8ffe8":
+                                    var mimeFour = "image/jpeg";
+                                    break;
+                                case "52494646":
+                                    var mimeFour = "video/avi";
+                                    break;
+                                case "4f676753":
+                                    var mimeFour = "application/ogg";
+                                    break;
+                                case "464c5601":
+                                    var mimeFour = "video/x-flv";
+                                    break;
+                                case "3026b275":
+                                    var mimeFour = "video/x-ms-wmv";
+                                    break;
+                                case "66726565":
+                                case "6d646174":
+                                case "77696465":
+                                case "706e6f74":
+                                case "736b6970":
+                                case "6d6f6f76":
+                                case "66747970":
+                                    var mimeFour = "video/quicktime";
+                                    break;
+                                case "667479704d534e56":
+                                case "6674797069736f6d":
+                                case "667479706d703432":
+                                    var mimeFour = "video/mp4";
+                                    break;
+                                default:
+                                    var mimeFour = "unknown";
+
+                            }
+                            if (mimeFour == "video/quicktime" && headerFour == 66747970) {
+                                arrFour = (new Uint8Array(e.target.result)).subarray(8, 12);
+                                for (var i = 0; i < arrFour.length; i++) {
+                                    headerFour += arr[i].toString(16);
+                                }
+                                if (headerFour != 6674797071742020) {
+                                    mimeFour = "unknown";
+                                }
+                            }
+                            if (extensionFour != mimeFour) {
+                                alert("There's something wrong with this file; upload another.");
+                                document.getElementById("uploadFour").value = '';
+                            }
+
+                        };
+                        fileReaderFour.readAsArrayBuffer(blobFour);
+
+                    }, false);
+
+                    var controlFive = document.getElementById("uploadFive");
+                    controlFive.addEventListener("change", function (event) {
+                        var extensionFive = controlFive.files;
+                        var blobFive = extensionFive[0];
+                        extensionFive = extensionFive[0].type;
+
+                        document.getElementById("attachmentFiveSize").value = blobFive.size;
+                        var fileReaderFive = new FileReader();
+                        fileReaderFive.onloadend = function (e) {
+                            var typeFive = extensionFive.split('/')[1];
+                            switch (typeFive) {
+                                case "quicktime":
+                                    var arrFive = (new Uint8Array(e.target.result)).subarray(4, 8);
+                                    break;
+                                case "mp4":
+                                    var arrFive = (new Uint8Array(e.target.result).subarray(4, 12));
+                                    break;
+                                default:
+                                    var arrFive = (new Uint8Array(e.target.result)).subarray(0, 4);
+                            }
+                            var headerFive = "";
+                            for (var i = 0; i < arrFive.length; i++) {
+                                headerFive += arrFive[i].toString(16);
+                            }
+
+                            switch (headerFive) {
+                                case "89504e47":
+                                    var mimeFive = "image/png";
+                                    break;
+                                case "47494638":
+                                    var mimeFive = "image/gif";
+                                    break;
+                                case "ffd8ffe0":
+                                case "ffd8ffe1":
+                                case "ffd8ffe2":
+                                case "ffd8ffe3":
+                                case "ffd8ffe8":
+                                    var mimeFive = "image/jpeg";
+                                    break;
+                                case "52494646":
+                                    var mimeFive = "video/avi";
+                                    break;
+                                case "4f676753":
+                                    var mimeFive = "application/ogg";
+                                    break;
+                                case "464c5601":
+                                    var mimeFive = "video/x-flv";
+                                    break;
+                                case "3026b275":
+                                    var mimeFive = "video/x-ms-wmv";
+                                    break;
+                                case "66726565":
+                                case "6d646174":
+                                case "77696465":
+                                case "706e6f74":
+                                case "736b6970":
+                                case "6d6f6f76":
+                                case "66747970":
+                                    var mimeFive = "video/quicktime";
+                                    break;
+                                case "667479704d534e56":
+                                case "6674797069736f6d":
+                                case "667479706d703432":
+                                    var mimeFive = "video/mp4";
+                                    break;
+                                default:
+                                    var mimeFive = "unknown";
+
+                            }
+                            if (mimeFive == "video/quicktime" && headerFive == 66747970) {
+                                arrFive = (new Uint8Array(e.target.result)).subarray(8, 12);
+                                for (var i = 0; i < arrFive.length; i++) {
+                                    headerFive += arr[i].toString(16);
+                                }
+                                if (headerFive != 6674797071742020) {
+                                    mimeFive = "unknown";
+                                }
+                            }
+                            if (extensionFive != mimeFive) {
+                                alert("There's something wrong with this file; upload another.");
+                                document.getElementById("uploadFive").value = '';
+                            }
+
+                        };
+                        fileReaderFive.readAsArrayBuffer(blobFive);
+
+                    }, false);
+
+                    const element = document.querySelector('form');
+                    maxSize = 26214400;
+                    element.addEventListener('submit', event => {
+                        if ((parseInt(document.getElementById("attachmentOneSize").value) + parseInt(document.getElementById("attachmentTwoSize").value) + parseInt(document.getElementById("attachmentThreeSize").value) + parseInt(document.getElementById("attachmentFourSize").value) + parseInt(document.getElementById("attachmentFiveSize").value) > maxSize)) {
+                            event.preventDefault();
+                            alert('Total size of all files must be less than ' + maxSize / 1024 / 1024 + ' MB. Try again');
+                            document.getElementById("uploadOne").value = '';
+                            document.getElementById("attachmentOneSize").value = 0;
+                            document.getElementById("uploadTwo").value = '';
+                            document.getElementById("attachmentTwoSize").value = 0;
+                            document.getElementById("uploadThree").value = '';
+                            document.getElementById("attachmentThreeSize").value = 0;
+                            document.getElementById("uploadFour").value = '';
+                            document.getElementById("attachmentFourSize").value = 0;
+                            document.getElementById("uploadFive").value = '';
+                            document.getElementById("attachmentFiveSize").value = 0;
+                        }
+                        
+                    });
+
+                </script>
+
+            </div>
+            <input type="submit" value="Submit" id="enter" />
+        </form>
+        <h3 id="home" onclick="redirectHome()">Back</h3>
+    </div>
+    <div class="bebe">
+        <img src="../static/BeBe.gif" id="bug1" />
+    </div>
+    <div class="killerbee">
+        <img src="../static/killerbee.gif" id="bug2" />
+    </div>
+</body>
+
+</html>

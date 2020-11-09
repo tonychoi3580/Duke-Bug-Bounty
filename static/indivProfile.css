@@ -1,0 +1,298 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    cursor: url("../static/cursor.png"), auto;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    cursor: url("../static/cursor.png"), auto;
+    text-align: center;
+    padding: 20px;
+    background-image: url(../static/background2.jpeg);
+    background-size: 1450px 850px;
+}
+
+a:hover, h3, #button:hover, #sound:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+
+.holder {
+    background-color: #ffc374;
+    margin: auto;
+    border: solid;
+    border-color: #de5f85;
+    width: 50%;
+    margin-top: 25px;
+    padding: 30px;
+    width: 60%;
+    height: 500px;
+    z-index: 2;
+    position: relative;
+    max-width: 720px;
+    min-width: 720px;
+    
+}
+
+.row {
+    background-color: white;
+    margin-top: 10px;
+    border: 2px solid #de5f85;
+    padding-right: 10px;
+}
+.user{
+    background-color: black;
+    position: relative;
+    border: solid #de5f85 5px;
+    color: White;
+    width: 300px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 15px;
+    text-align:center;
+}
+.netID{
+    color:#de5f85;
+}
+
+
+.columnOne {
+    float: left;
+    width: 25%;
+    color: #de5f85;
+    margin-left: -20px;
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 20px;
+}
+
+.columnTwo {
+    float: left;
+    width: 35%;
+    margin-top: 29px;
+}
+
+.columnThree {
+    float: left;
+    width: 10%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.columnFour {
+    float: left;
+    width: 30%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.label {
+    margin: 45px;
+    text-align: center;
+}
+#resolved {
+    margin: 10px;
+}
+
+#domain {
+    margin: 25px;
+}
+
+.labelTwoDiff {
+    margin: 40px -10px;
+    text-align: center;
+    color: #de5f85;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.elementTwoDiff {
+    margin: 30px 10px;
+    margin-left: 30px;
+    padding: 10px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    max-height: 50px;
+    max-width: 160px;
+    min-height: 50px;
+    min-width: 160px;
+    vertical-align:baseline;
+    
+}
+
+
+#button {
+    background-color: #de5f85;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    position: absolute;
+    bottom: 22%;
+    left: 35%;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#button:hover {
+    background-color: #99d9ea;
+}
+
+.element {
+    margin: 20px;
+    padding: 20px;
+    padding-left: 0;
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+#num {
+    position: absolute;
+    right: 10%;
+    bottom: 20%;
+    max-height: 50px;
+    max-width: 100px;
+    min-height: 50px;
+    min-width: 100px;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+
+#idLabel {
+    display: inline;
+    text-align: left;
+    position: relative;
+    left: -18%;
+    color: #de5f85;
+    font-family: 'Orbitron', sans-serif;
+}
+#special{
+    margin-top: 35px;
+}
+
+
+span {
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    position: relative;
+    left: -12%;
+}
+
+
+#amount {
+    position: absolute;
+    top: 38%;
+    padding-top: 15px;
+}
+
+#types {
+    position: absolute;
+    bottom: 15%;
+    left: 17%;
+    max-height: 100px;
+    max-width: 220px;
+    min-height: 100px;
+    min-width: 220px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+#name {
+    position: absolute;
+    top: 40%;
+    left: 18%;
+    max-height: 30px;
+    max-width: 220px;
+    min-height: 30px;
+    min-width: 220px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    padding-left: 20px;
+}
+
+h3 {
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 10%;
+    padding: 5px;
+    min-width: 150px;
+    position: absolute;
+    color: white;
+}
+
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+h3:hover {
+    background-color: lightcoral;
+}
+
+#home {
+    right: 7%;
+    bottom: 3%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#back {
+    left: 40%;
+    bottom: 3%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+#bug1 {
+    position: fixed;
+    left: 2%;
+    width: 20%;
+    top: 15%;
+}
+
+
+#bug1:hover {
+    margin-top: 150px;
+}
+
+#bug2 {
+    position: fixed;
+    width: 25%;
+    right: 1%;
+    bottom: 25%;
+}
+
+#bug2:hover {
+    margin-bottom: 150px;
+}
+
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+    color: #de5f85;
+    margin-top: 20px;
+}
+
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}
+
+#nameLabel{
+    padding-bottom: 30px;
+}

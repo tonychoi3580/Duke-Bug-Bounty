@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    cursor: url("../static/cursor.png"), auto;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    cursor: url("../static/cursor.png"), auto;
+    text-align: center;
+    padding: 20px;
+    background-image: url(../static/background2.jpeg);
+    background-size: 1450px 850px;
+}
+a:hover, h3, #button:hover, #sound:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+
+
+.holder {
+    background-color: #ffc374;
+    margin: auto;
+    border: solid;
+    border-color: #de5f85;
+    width: 50%;
+    margin-top: 25px;
+    padding: 30px;
+    width: 60%;
+    height: 500px;
+    z-index: 2;
+    position: relative;
+    max-width: 720px;
+    
+}
+
+.row {
+    background-color: white;
+    margin-top: 10px;
+    border: 2px solid #de5f85;
+    padding-right: 10px;
+    height: 350px;
+}
+
+.user{
+    background-color: black;
+    position: relative;
+    border: solid #de5f85 5px;
+    color: White;
+    width: 300px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 20px;
+    padding: 10px;
+    margin: 0 auto;
+    margin-top: 30px;
+    text-align:center;
+}
+
+.netID{
+    color:#de5f85;
+}
+h4{
+    font-family: "Cormac";
+    font-size: 29px;
+    width: 280px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+#link{
+    color: #de5f85;
+    text-decoration: underline;
+}
+
+#link:hover{
+    color: #834187;
+    cursor: url("../static/cursorpoint.png"), auto;
+
+}
+
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+h3:hover {
+    background-color: lightcoral;
+}
+
+h3 {
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 10%;
+    padding: 5px;
+    min-width: 150px;
+    position: absolute;
+    color: white;
+}
+
+#home {
+    right: 7%;
+    bottom: 6%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#back {
+    left: 7%;
+    bottom: 6%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+#bug1 {
+    position: fixed;
+    left: 2%;
+    width: 20%;
+    top: 15%;
+}
+
+
+#bug1:hover {
+    margin-top: 150px;
+}
+
+#bug2 {
+    position: fixed;
+    width: 25%;
+    right: 1%;
+    bottom: 25%;
+}
+
+#bug2:hover {
+    margin-bottom: 150px;
+}
+
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+    color: #de5f85;
+    margin-top: 20px;
+}
+
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}

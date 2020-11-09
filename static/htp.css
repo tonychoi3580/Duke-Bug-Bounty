@@ -1,0 +1,442 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+    cursor: url("cursor.png"), auto;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #de5f85;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    background-image: url(background2.jpeg);
+    background-size: 1450px 850px;
+    cursor: url("cursor.png"), auto;
+}
+
+h1 {
+    font-size: 60px;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.slider {
+
+    border-color: yellow;
+    width: 1100px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.wrapper-div{
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+    border: solid;
+    border-color: lightcoral;
+}
+
+#switch {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    margin-left: -5px;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.htp-slide-container {
+    position: relative;
+    margin: 0 auto;
+    width: 522px;
+    top: -387px;
+    text-align: center;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+    width: 522px;
+    height: 308px;
+    margin-left: -4px;
+    object-fit: cover;
+}
+
+#isv {
+    width: 390px;
+    height: 232px;
+    background-color: #222222;
+    text-align: center;
+    color: #0C7CBA;
+    overflow: scroll;
+    display: block;
+    margin: 0 auto;
+    width: 522px;
+    height: 308px;
+    margin-left: -4px;
+}
+
+.isvp, .ind, .osv{
+    color: white;
+    font-family: "Cormac";
+}
+
+#rls {
+    width: 390px;
+    height: 232px;
+    background-color: #222222;
+    text-align: center;
+    color: #ffc374;
+    overflow: scroll;
+    display: block;
+    margin: 0 auto;
+    width: 522px;
+    height: 308px;
+    margin-left: -4px;
+}
+
+.rlsp {
+    color: white;
+    font-family: "Cormac";
+    
+}
+
+#FAQ {
+    background-color: #222222;
+    text-align: center;
+    color: #7AB648;
+    overflow: scroll;
+    overflow-x: scroll;
+    display: block;
+    margin: 0 auto;
+    width: 522px;
+    height: 308px;
+    margin-left: -4px
+}
+#front{
+    width: 522px;
+    height: 308px;
+    background-color: #222222;
+    text-align: center;
+}
+#logo{
+    width: 250px;
+    margin-top: 25px;
+}
+.logowords{
+    color: #E2E6ED;
+    margin-top: 0px;
+}
+
+
+.ans {
+    color: white;
+    font-family: "Cormac";
+    font-size: 14px;
+    direction: ltr;
+}
+
+.question {
+    font-family: "Cormac";
+    color: #7AB648;
+    font-size: 15px;
+    margin-top: 15px;
+    direction: ltr;
+}
+
+.slides {
+    position: absolute;
+}
+
+#htpvid, #htpisv, #htprls, #htpfaq {
+    display: none;
+}
+
+#htp-button-container {
+    position: absolute;
+    top: 155px;
+    right: 125px;
+   
+}
+.htpisv-button {
+    width: 50px;
+    position: absolute;
+    left: -55px;
+    top: 52px;
+}
+
+.htpvid-button {
+    width: 50px;
+}
+
+.htpfaq-button {
+    
+    top: 55px;
+    right: -58px;
+    position: absolute;
+}
+.htprls-button{
+    position: absolute;
+    top: 106px;
+
+}
+
+.home{
+    position: absolute;
+    top: 160px;
+    left: -760px;
+}
+
+#htpvid:checked ~ #vid,
+#htpisv:checked ~ #isv,
+#htprls:checked ~ #rls,
+#htpfaq:checked ~ #FAQ {
+    z-index: 9;
+}
+
+p {
+    color: black;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 1px;
+}
+
+.htpbutton {
+    background-color: #ffc374;
+    border: solid;
+    border-color: #de5f85;
+    width: 400px;
+    padding: 10px 0;
+    margin: 0 auto;
+    font-size: 15px;
+    margin-bottom: 50px;
+    line-height: 30px;
+    margin-top: -20px;
+    height: 140px;
+}
+
+
+.xcolor {
+    margin-top: 17px;
+}
+
+.xcolor::first-letter {
+    color: #de5f85;
+    font-weight: bold;
+}
+
+.acolor::first-letter {
+    color: #7AB648;
+    font-weight: bold;
+}
+
+.ycolor::first-letter {
+    color: #0C7CBA;
+    font-weight: bold;
+}
+
+.bcolor::first-letter {
+    color: white;
+    font-weight: bold;
+}
+
+
+#choose {
+    line-height: 16px;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+h3 {
+    margin: 10px auto;
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 30%;
+    padding: 5px;
+    color: white;
+}
+
+h3 a {
+    text-decoration: none;
+    color: white;
+}
+
+#back:hover {
+    background-color: lightcoral;
+}
+
+#bug1 {
+    position: fixed;
+    left: -1%;
+    width: 20%;
+    top: 9%;
+    z-index: -1;
+}
+
+#bug1:hover{
+    margin-top: 150px;
+}
+
+
+#bug2 {
+    position: fixed;
+    width: 23%;
+    right: -1%;
+    bottom: 21%;
+    z-index: -1;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+
+
+h3:hover, a:hover, #x:hover, #y:hover, #a:hover, #b:hover, #home:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px;
+}
+
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#domains, #vuln, #ovuln{
+    padding-top: 10px;
+}
+#ovuln .osv{
+    margin: 10px;
+}
+
+
+
+
+
+
+@media (max-width: 1000px){
+.slider{
+    width: 800px;
+
+}
+.htpbutton{
+    margin-top: 20px;
+}
+
+
+#htp-button-container{
+ right: 85px;
+ top: 113px;
+}
+
+.htpisv-button{
+    left: -35px;
+    top: 32px;
+}
+.htpfaq-button{
+    top: 33px;
+    right: -36px;
+}
+.home{
+    right: 330px;
+    top: 110px;
+}
+.htprls-button{
+    top: 66px;
+}
+.htp-slide-container{
+    top: -270px;
+    left:89px;
+}
+#front{
+    width: 349px;
+    height: 205px;
+}
+#FAQ{
+    width: 343px;
+    height: 205px;
+}
+video{
+    width: 345px;
+    height: 205px;
+}
+#rls{
+    width: 345px;
+    height: 205px;
+}
+#isv{
+    width: 345px;
+    height: 205px;
+}
+#logo{
+width:150px;
+}
+.column{
+    width: 50%;
+}
+
+}
+
+
+
+.isvp, .osv{
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted white;
+}
+
+.osv .tooltiptext {
+    visibility: hidden;
+    width: 170px;
+    background-color: #4f36ab;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    right: 105%;
+}
+
+.isvp .tooltiptext{
+    visibility: hidden;
+    width: 170px;
+    background-color: #4f36ab;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 10px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+}
+
+.isvp:hover .tooltiptext, .osv:hover .tooltiptext {
+    visibility: visible;
+}
+
+#exception{
+    border-bottom: none;
+}

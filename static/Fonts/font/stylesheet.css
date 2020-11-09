@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'Moreno Rust';
+    src: url('MorenoRust-XThin.eot');
+    src: local('Moreno Rust XThin'), local('MorenoRust-XThin'),
+        url('MorenoRust-XThin.eot?#iefix') format('embedded-opentype'),
+        url('MorenoRust-XThin.woff2') format('woff2'),
+        url('MorenoRust-XThin.woff') format('woff'),
+        url('MorenoRust-XThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Moreno Rust Two';
+    src: url('MorenoRustTwo-XThin.eot');
+    src: local('Moreno Rust Two XThin'), local('MorenoRustTwo-XThin'),
+        url('MorenoRustTwo-XThin.eot?#iefix') format('embedded-opentype'),
+        url('MorenoRustTwo-XThin.woff2') format('woff2'),
+        url('MorenoRustTwo-XThin.woff') format('woff'),
+        url('MorenoRustTwo-XThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Moreno Rough';
+    src: url('MorenoRough-XThin.eot');
+    src: local('Moreno Rough XThin'), local('MorenoRough-XThin'),
+        url('MorenoRough-XThin.eot?#iefix') format('embedded-opentype'),
+        url('MorenoRough-XThin.woff2') format('woff2'),
+        url('MorenoRough-XThin.woff') format('woff'),
+        url('MorenoRough-XThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Moreno Rough Two';
+    src: url('MorenoRoughTwo-XThin.eot');
+    src: local('Moreno Rough Two XThin'), local('MorenoRoughTwo-XThin'),
+        url('MorenoRoughTwo-XThin.eot?#iefix') format('embedded-opentype'),
+        url('MorenoRoughTwo-XThin.woff2') format('woff2'),
+        url('MorenoRoughTwo-XThin.woff') format('woff'),
+        url('MorenoRoughTwo-XThin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+

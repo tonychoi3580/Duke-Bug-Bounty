@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
+* {
+	cursor: url("../static/cursor.png"), auto;
+}
+
+body {
+	font-family: 'Orbitron', sans-serif;
+	cursor: url("../static/cursor.png"), auto;
+	text-align: center;
+	padding: 20px;
+	background-image: url(../static/background2.jpeg);
+	background-size: 1450px 850px;
+}
+
+h1 {
+    font-size: 50px;
+    color: #de5f85;
+    font-weight: bold;
+}
+.submit{
+    background-color: #ffc374;
+    margin: auto;
+    border: solid;
+    border-color: #de5f85;
+    width: 50%;
+    margin-top: 20px;
+    padding: 30px;
+    min-width: 60%;
+    position: relative;
+    padding-bottom: -15px;
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 2;
+}
+
+.submit::-webkit-scrollbar {
+    width: 25px;
+    z-index: 2;
+}
+
+.submit::-webkit-scrollbar-track {
+    background-color: #de5f85;
+    border: 3px solid black;
+    z-index: 2;
+}
+
+.submit::-webkit-scrollbar-thumb {
+    background-color: #834187;
+    border: 3px solid black;
+    z-index: 3;
+}
+
+.intro{
+    background-color: white;
+    border: solid black;
+    padding: 10px;
+    margin: 10px;
+}
+.fields{
+    text-align: left;
+    background-color: white;
+    border: solid black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.input, #domainList {
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    /*recustomize the input font*/
+}
+
+#home, #enter {
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    margin: 20px;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+    width: 23%;
+    height: 5%;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    position: absolute;
+    right: -30%;
+    box-sizing: content-box;
+}
+#home{
+    left: 5%;
+   
+    
+}
+
+#enter{
+    right: 5%;
+
+    
+}
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+
+ #enter:hover {
+    background-color: lightcoral;
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+#home:hover {
+    background-color: lightcoral;
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+#sound:hover{
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+
+
+#bug1 {
+    position: fixed;
+    left:-1%;
+    width: 20%;
+    top:20%;
+    z-index: 0;
+    margin-bottom: 0px;
+}
+#bug1:hover{
+    margin-top: 150px;
+}
+#bug2{
+    position: fixed;
+    width: 23%;
+    right: -1%;
+    bottom: 25%;
+    z-index:0;
+    margin-bottom: 0px;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}

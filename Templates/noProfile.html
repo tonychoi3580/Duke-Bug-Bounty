@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/noProfile.css" />
+    <title> Bug Bounty </title>
+</head>
+<body>
+    <script>
+        function redirectSubmit() {
+            window.location.replace("{{url_for('submission')}}");
+        }
+    </script>
+    <h1> User Profile </h1>
+    <div class="holder">
+        
+
+            
+        <div class="row">
+
+            <div class="user"> 
+                <h2>User </h2>
+                <h2 class ="netID"> <!--example-->yk200</h2> 
+            </div>
+            <h4 class = "notSub">
+                has not submitted any bugs. Go <span id = "link" onclick="redirectSubmit()">'Submit a Bug'</span> to continue.
+            </h4>
+           
+        </div>
+        <h3 id="back" onclick="redirectProfiles()"> Back </h3>
+        <h3 id="home" onclick="redirectHome()"> Home </h3>
+
+    </div>
+
+    <img src="../static/BeBe.gif" id="bug1" />
+    <img src="../static/killerbee.gif" id="bug2" />
+    
+</body>
+</html>

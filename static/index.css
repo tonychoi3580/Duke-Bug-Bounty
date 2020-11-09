@@ -1,0 +1,177 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    cursor: url("../static/cursor.png"), auto;
+    
+}
+
+
+#three{
+    width: 340px;
+    z-index: 2;
+    margin:0 auto;
+    margin-top: -35px;
+
+}
+
+body {
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    padding: 20px;
+    background-color: #4b3a96;
+    background-image: url(../static/background2.jpeg);
+    background-size: 1450px 850px;
+    z-index: 2;
+}
+
+a:hover, #sound:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+
+}
+   
+nav ul {
+    list-style: none;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+}
+
+nav {
+    background-color: #ffc374;
+    border: solid;
+    border-color: #de5f85;
+    width: 300px;
+    padding: 20px;
+    min-width: 380px;
+    z-index: 1;
+    margin: 0 auto;
+    margin-top: 8px;
+}
+
+h2 {
+    color: #de5f85;
+    font-size: 20px;
+    bottom: 110px;
+    margin: 0 auto;
+    margin-top: -8px;
+}
+
+nav li {
+    margin: 10px auto;
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 40%;
+    padding: 10px;
+    color: white;
+}
+
+ul .adjust {
+    margin-top: -2px;
+    margin-bottom: -2px;
+}
+
+p {
+    color: #de5f85;
+    font-size: 30px;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    margin: 0, auto;
+}
+th {
+    color: #de5f85;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 20px;
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+
+.leaderboard {
+    background-color: #ffc374;
+    margin: 0 auto;
+    border: solid;
+    border-color: #de5f85;
+    width: 200px;
+    padding: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    min-width: 380px;
+    z-index: 1;
+    text-align: center;
+    margin-top: 15px;    
+}
+
+.hs{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+#bug1 {
+    position: fixed;
+    left:8%;
+    width: 20%;
+    top:20%;
+    z-index: 0;
+    margin-bottom: 0px;
+}
+#bug1:hover{
+    margin-top: 150px;
+}
+#bug2{
+    position: fixed;
+    width: 25%;
+    right: 5%;
+    bottom: 25%;
+    z-index:0;
+    margin-bottom: 0px;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+nav li:hover{
+    background-color: lightcoral;
+    cursor: url("../static/cursorpoint.png"), auto;
+
+}
+
+#sound{
+    position: absolute;
+    top:0;
+    left:0;
+    margin: 7px;
+}
+.profile{
+    margin: 10px auto;
+    background-color: #834187;
+    border: solid;
+    width: 150px;
+    border-color: #de5f85;
+    border-radius: 25px;
+    padding: 10px;
+    color: #de5f85;
+    position: absolute;
+    font-size: 16px;
+    font-family: 'Orbitron', sans-serif;
+    right: 40px;
+    top:10px;
+    text-decoration: underline;
+    z-index: 5;
+}
+
+.profile:hover{
+    background-color: lightcoral;
+    z-index: 5;
+    cursor: url("../static/cursorpoint.png"), auto;
+    color: white;
+}

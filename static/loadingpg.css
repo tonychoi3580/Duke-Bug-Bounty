@@ -1,0 +1,84 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+* {
+    cursor: url("../static/cursor.png"), auto;
+}
+body {
+    color: #de5f85;
+    text-align: center;
+    background-image: url(../static/background2.jpeg);
+    background-size:1450px 850px;
+    font-family: 'Orbitron', sans-serif;
+    cursor: url("../static/cursor.png"), auto;
+}
+a:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+   }
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 60px;
+    margin: 50px;
+    top: 0;
+    text-align: center;
+    line-height: 110%;
+}
+h2{
+    font-size: 20px;
+}
+a{
+    text-decoration: none;
+}
+.button {
+    position: relative;
+    top: 600px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.bottom{
+    position: relative;
+    top: 670px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 20px 0;
+}
+h2 a {
+    color: #de5f85;
+}
+#three {
+    position: relative;
+    width: 550px;
+    top: 100px;
+    left:270px;
+    transform: translate(-50%,-50%);
+    display: in-block;
+    margin:0 auto;
+    
+ }
+    
+
+#bug1 {
+    position: fixed;
+    left:8%;
+    width: 20%;
+    top:20%;
+    z-index: 0;
+}
+#bug1:hover{
+    margin-top: 150px;
+}
+
+#bug2{
+    position: fixed;
+    width: 25%;
+    right: 5%;
+    bottom: 25%;
+    z-index:0;
+}
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+/*still need to make page responsive*/

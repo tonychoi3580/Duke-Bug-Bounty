@@ -1,0 +1,235 @@
+﻿<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/adminEnd.css" />
+    <title> Bug Bounty </title>
+   
+</head>
+<body>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <script>
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+    </script>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+
+    <h1> THANKS FOR PLAYING! </h1>
+    <div class="input">
+        <h4 class="yourInput"> Your Input: </h4>
+        <div class="results">
+            <p>1. Your name: <span id="result1"> {{output['name']}}</span> </p>
+            <p>2. Submission NetID: <span id="result2">{{output['id']}} </span> </p>
+            <p>3. What type of Vulnerability?: <span id="result3"> {{output['vuln']}} </span> </p>
+            <p>4. What domain is it on?: <span id="result4">{{output['domain']}}</span> </p>
+            <p>5. Is this submission eligible for a reward?: <span id="result5">{{output['eligible']}}</span> </p>
+            <p>6. What is the reward amount for this submission? <span id="result6"> ${{output['amount']}}</span> </p>
+            <p>7. Additional Notes: <span id="result7"> {{output['notes']}}</span></p>
+        </div>
+        <div class="summaryHolder">
+            <p id="summary">
+                Duke Bug Bounty participant with netID {{output['id']}} has submitted a {{output['vuln']}} vulnerability on the domain {{output['domain']}} and {{output['filler']}} eligible for reward. <br /> Reward: ${{output['amount']}} <br /> Additional Notes: {{output['notes']}}
+            </p>
+        </div>
+        <h4 class="nextSteps"> <span class="next">NEXT STEPS:</span> Send this information to the Finance Team and the user who submitted the bug to process the reward.</h4>
+        <h3 id="home" onclick="redirectHome()"> Home </h3>
+        <h3 id="ticket" onclick="redirectTic()"> Tickets </h3>
+    </div>
+
+
+    <div class="bebe">
+        <img src="../static/BeBe.gif" id="bug1" />
+    </div>
+    <div class="killerbee">
+        <img src="../static/killerbee.gif" id="bug2" />
+    </div>
+
+
+    <script>
+
+        function redirectHome() {
+                    window.location.replace("{{url_for('home_page')}}");
+                }
+        function redirectTic() {
+            window.location.replace("{{url_for('ticket_page')}}");
+        }
+
+
+
+        /*
+         * function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+
+            if (decodeURIComponent(pair[0]) == variable) {
+                var full = decodeURIComponent(pair[1]);
+                var str = decodeURIComponent((full + '').replace(/\+/g, '%20'));
+                return str;
+            }
+        }
+        console.log('Query variable %s not found', variable);
+        }
+         * document.getElementById("result1").innerHTML= getQueryVariable("name");
+        document.getElementById("result2").innerHTML= getQueryVariable("netid");
+
+        document.getElementById("result3").innerHTML= getQueryVariable("vuln");
+        document.getElementById("result4").innerHTML= getQueryVariable("eligible");
+        document.getElementById("result5").innerHTML= getQueryVariable("amount");
+         */
+
+
+
+
+        //sound script
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+    </script>
+
+
+
+</body>
+</html>

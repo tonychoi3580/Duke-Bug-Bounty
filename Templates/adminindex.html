@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental program aiming to improve Duke's online security and foster a community for students to research and test the limits of cyber security in a responsible fashion." />
+    <!-- Stole the description from MIT. Make sure to change.-->
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <title> Bug Bounty </title>
+    <link rel="stylesheet" type="text/css" href="../static/index.css" />
+    <link rel="shortcut icon" href="#" />
+</head>
+
+<body>
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <!--Images and gifs - NOT DONE-->
+    <div class="titleimg">
+        <img src="../static/title1.gif" id="three" alt="Gif" />
+    </div>
+
+    <!--Submit, how to play, and rewards box-->
+    <nav>
+        <ul>
+            <li onclick="redirect()"> Tickets</li>
+            <li class="adjust" onclick="redirectProfiles()"> User Profiles </li>
+            <li onclick="redirectRewards()"> Rewards</li>
+        </ul>
+    </nav>
+
+    <script type="text/javascript">
+       
+
+        function redirect() {
+            //redirects to Oauth sign in if user is not already signed in, then returns to submit page.
+            window.location.replace("{{url_for('ticket_page')}}");
+        }
+        function redirectProfiles() {
+            window.location.replace("{{url_for('userProfiles')}}");
+        }
+        function redirectRewards() {
+            window.location.replace("{{url_for('admin_rewards_page')}}");
+        }
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        if (sessionStorage.getItem('userPlay') == null && !played) {
+            song.play();
+            played = true;
+            sessionStorage.setItem("userPlay", "true");
+        }
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+    </script>
+
+    <!--Leaderboard-->
+    <div class="leaderboard">
+        <p class="hs"> High Scores </p>
+        <table>
+            <tr>
+                <th>Rank</th>
+                <th>Score</th>
+                <th>Netid</th>
+                <th>Number of <br /> Submissions</th>
+            </tr>
+            {% for i in range(3) %}
+            <tr>
+                <td>{{i+1}}</td>
+                <td>${{leaderboard[i][4]}}</td>
+                <td>{{leaderboard[i][0]}}</td>
+                <td>{{leaderboard[i][3]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <!-- Figure out how to automate -->
+    </div>
+    <br>
+
+    <h2> ©2020 Duke OIT </h2>
+
+    <div class="bebe">
+        <img src="../static/BeBe.gif" id="bug1" />
+    </div>
+    <div class="killerbee">
+        <img src="../static/killerbee.gif" id="bug2" />
+    </div>
+</body>
+</html>

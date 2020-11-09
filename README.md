@@ -1,1 +1,0 @@
-# COVID-Risk-Web-App

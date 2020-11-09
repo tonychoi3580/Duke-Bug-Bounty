@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/errorPage.css" />
+    <title> Bug Bounty </title>
+</head>
+
+<body>
+    <script>
+        function redirectAdminLoading() {
+            window.location.replace("{{url_for('adminLoading_page')}}");
+        }
+    </script>
+    <div class="nav"> 
+        <h1>You are not authorized to enter this site</h1>
+        <p>(┛ಠ_ಠ)┛彡┻━┻</p>
+        <div id="button" onclick="redirectAdminLoading()"> Try Again </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,236 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+* {
+    cursor: url("../static/cursor.png"), auto;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    cursor: url("../static/cursor.png"), auto;
+    text-align: center;
+    padding: 20px;
+    background-image: url(../static/background2.jpeg);
+    background-size: 1450px 850px;
+}
+
+a:hover, h3, #button:hover, #sound:hover {
+    cursor: url("../static/cursorpoint.png"), auto;
+}
+
+.holder {
+    background-color: #ffc374;
+    margin: auto;
+    border: solid;
+    border-color: #de5f85;
+    width: 50%;
+    margin-top: 25px;
+    padding: 30px;
+    width: 60%;
+    padding-bottom: 20px;
+    height: 500px;
+    z-index: 2;
+    position: relative;
+    max-width: 720px;
+}
+
+.row {
+    background-color: white;
+    margin-top: 10px;
+    border: 2px solid #de5f85;
+    padding-bottom: 40px;
+    padding-right: 10px;
+}
+.columnOne {
+    float: left;
+    width: 20%;
+    color: #de5f85;
+    font-family: 'Orbitron', sans-serif;
+}
+.columnTwo {
+    float: left;
+    width: 35%;
+}
+
+.columnThree {
+    float: left;
+    width: 10%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.columnFour{
+    float: left;
+    width: 35%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.label{
+    margin: 20px;
+    text-align: center;
+}
+#resolved{
+    margin: 10px;
+}
+#domain{
+    margin: 25px;
+}
+
+.labelTwoDiff {
+    margin: 30px 10px;
+    text-align: center;
+    color: #de5f85;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+.elementTwoDiff {
+    margin: 30px 10px;
+    margin-left: 30px;
+    padding: 10px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 120px;
+    max-width: 190px;
+    min-height: 110px;
+    min-width: 190px;
+}
+#notes{
+    position: absolute;
+    bottom: 40%;
+}
+#button {
+    background-color: #de5f85;
+    color: white;
+    border-radius: 10px;
+    padding: 15px;
+    position: absolute;
+    bottom: 22%;
+    left: 35%;
+    font-weight: 600;
+    font-family: 'Orbitron', sans-serif;
+}
+
+#button:hover {
+    background-color: #99d9ea;
+}
+
+.element {
+    margin: 20px;
+    padding: 8px;
+    border: solid;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+#idLabel {
+    display: inline;
+    text-align: left;
+    position: relative;
+    left: -18%;
+    color: #de5f85;
+    font-family: 'Orbitron', sans-serif;
+}
+span{
+    color: black;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 10px;
+    position: relative;
+    left: -12%;
+
+}
+
+#domain{
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+#des{
+    position: absolute;
+    top: 7%;
+}
+#notesElement{
+    position: absolute;
+    bottom: 30%;
+}
+#desLabel{
+    margin-left: -15px;
+}
+
+h3 {
+    background-color: #834187;
+    border: solid;
+    border-color: #de5f85;
+    border-radius: 25px;
+    width: 10%;
+    padding: 5px;
+    min-width: 150px;
+    position: absolute;
+    color: white;
+}
+
+h3 a {
+    color: white;
+    text-decoration: none;
+}
+
+h3:hover {
+    background-color: lightcoral;
+}
+
+#home {
+    right: 7%;
+    bottom: 4%;
+    font-family: 'Orbitron', sans-serif;
+}
+#back {
+    left: 7%;
+    bottom: 4%;
+    font-family: 'Orbitron', sans-serif;
+}
+
+
+#bug1 {
+    position: fixed;
+    left:2%;
+    width: 20%;
+    top:15%;
+}
+
+
+#bug1:hover{
+    margin-top: 150px;
+}
+
+#bug2{
+    position: fixed;
+    width: 25%;
+    right: 1%;
+    bottom: 25%;
+}
+
+#bug2:hover{
+    margin-bottom: 150px;
+}
+
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 60px;
+    color: #de5f85;
+    margin-top: 20px;
+}
+
+#sound {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 7px;
+}

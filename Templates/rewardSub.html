@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Duke Bug Bounty team" />
+    <meta name="description" content="The Duke Bug Bounty program is an experimental project designed to better secure Duke’s system at the grassroots level, introduce students to cybersecurity through an engaging game, and sharpen the professional and technical skills of more advanced bug bounty hunters." />
+    <meta name="keywords" content="bug bounty, duke, security, cybersecurity, vulnerability, submit, reward" />
+    <link rel="stylesheet" type="text/css" href="../static/rewardSub.css" />
+    <title> Bug Bounty </title>
+</head>
+<body>
+
+    <audio loop preload="auto" autobuffer src="../static/sampleMusic.mp4" id="audio">
+    </audio>
+    <img src="../static/audiobutton-mute.png" width="50" height="50" id="sound" onmouseout="toggleImageOff()" onmouseover="toggleImageOn()" onclick="togglePlay()"></>
+    <script>
+        function redirectHome() {
+                window.location.replace("{{url_for('adminindex')}}");
+            }
+
+        function setCookie(c_name, value, exdays) {
+            var exdate = new Date();
+            exdate.setDate(exdate.getDate() + exdays);
+            var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+            document.cookie = c_name + "=" + c_value;
+        }
+
+        function getCookie(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        var song = document.getElementsByTagName('audio')[0];
+        var played = false;
+        var tillPlayed = getCookie('timePlayed');
+        function update() {
+            if (!played && tillPlayed) {
+                if (sessionStorage.getItem('userPlay') == 'true') {
+                    song.currentTime = tillPlayed;
+                    song.play();
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton.png";
+                }
+                else {
+                    song.currentTime = tillPlayed;
+                    played = true;
+                    document.getElementById("sound").src = "../static/audiobutton-mute.png";
+                }
+            }
+            else {
+                setCookie('timePlayed', song.currentTime);
+            }
+        }
+        setInterval(update, 10);
+
+        function toggleImageOn() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+        function toggleImageOff() {
+            if (!audio.paused) {
+                document.getElementById("sound").src = "../static/audiobutton.png";
+            }
+            else {
+                document.getElementById("sound").src = "../static/audiobutton-mute.png";
+            }
+        }
+        function togglePlay() {
+            if (audio.paused) {
+                sessionStorage.setItem("userPlay", "true");
+                audio.play();
+                document.getElementById("sound").src = "../static/audiobutton-hover.png";
+            }
+            else {
+                sessionStorage.setItem("userPlay", "false");
+                audio.pause();
+                document.getElementById("sound").src = "../static/audiobutton-mute-hover.png";
+            }
+        }
+
+    </script>
+
+    <h1> Reward Ticket</h1>
+
+    <div class="submit">
+        <div class="intro">
+            Thank you for your time and effort spent improving the security of our Duke community! <br />  <br /> Please answer the following questions below to determine the reward for the submission.
+            <br /> <br /> Check the rewards page for guidelines. Should you have any questions, please do not hesitate to email <a href="mailto:bounty@duke.edu"> bounty@duke.edu</a>. <br /> <p><span style="color:red"> * </span> = required field</p>
+        </div>
+        <form id="form" action="#" method="post" enctype="multipart/form-data" onsubmit="return confirm('Do you really want to submit the form?');">
+            <input type="hidden" name="Submission_URL" id="Submission_URL" />
+            <div class="fields">
+                <label for="name"> 1) Your name <span style="color:red"> * </span><br /></label>
+                <input type="text" contenteditable="true" name="name" class="input" required />
+            </div>
+            <div class="fields">
+                <label for="netID"> 2) Submission NetID <span style="color:red"> * </span><br /> </label>
+                <input type="text" name="netid" class="input" value="{{output['netID']}}" required />
+            </div>
+            <div class="fields">
+                <label for="eligible"> 3) Is this bug eligible for a reward? <span style="color:red"> * </span><br /> </label>
+                <select name="eligible">
+                    <option value="Yes"> Yes </option>
+                    <option value="No"> No </option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="vuln"> 4) What type of vulnerability was uncovered? <span style="color:red"> * </span><br /> </label>
+                <select name="vuln">
+                    <option value="{{output['vulnerability']}}" selected>{{output['vulnerability']}}</option>
+                    <option value="Remote Code Execution (RCE)"> Remote Code Execution (RCE) </option>
+                    <option value="SQL Injection"> SQL Injection </option>
+                    <option value="XML External Entity Injection (XXE)"> XML External Entity Injection (XXE) </option>
+                    <option value="Authoriztion Bypass/Escalation"> Authoriztion Bypass/Escalation </option>
+                    <option value="Sensistive Information Leaks"> Sensistive Information Leaks </option>
+                    <option value="Cross-Site Scripting (XSS)"> Cross-Site Scripting (XSS) </option>
+                    <option value="Cross-Site Request Forgery (CSRF)"> Cross-Site Request Forgery (CSRF) </option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="domains"> 3) What domain is the vulnerability on? <span style="color:red"> * </span><br /> </label>
+                <select name="domain">
+                    <option value="{{output['domain']}}" selected>{{output['domain']}}</option>
+                    <option value="studentaffairs.duke.edu"> studentaffairs.duke.edu </option>
+                    <option value="pratt.duke.edu"> pratt.duke.edu </option>
+                    <option value="trinity.duke.edu"> trinity.duke.edu </option>
+                    <option value="shib.oit.duke.edu"> shib.oit.duke.edu </option>
+                    <option value="fuqua.duke.edu"> registrar.duke.edu </option>
+                </select>
+            </div>
+            <div class="fields">
+                <label for="amount"> 5) What is the reward amount for this submission? <span style="color:red"> * </span><br /> </label>
+                <input id="results5" type="text" name="amount" class="input" required />
+            </div>
+            <div class="fields">
+                <label for="amount"> 6) Additional notes <br /> </label>
+                <textarea id="result6" name="notes" class="input" form="form" rows="6" cols="50"></textarea>
+            </div>
+            <input type="submit" value="Submit" id="enter" />
+        </form>
+        <h3 id="home" onclick="redirectHome()">Back</h3>
+    </div>
+
+    <div class="bebe">
+        <img src="../static/BeBe.gif" id="bug1" />
+    </div>
+    <div class="killerbee">
+        <img src="../static/killerbee.gif" id="bug2" />
+    </div>
+</body>
+</html>
